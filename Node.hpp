@@ -6,10 +6,10 @@ class Node {
 
         int data;
         bool isRed;
-        Node* leftLeg;
-        Node* rightLeg;
+        Node* left;
+        Node* right;
 
-        Node* Insert ( int data, bool isRed );
+        Node* Insert ( int data );
 
         friend class BSTree;
 
