@@ -9,7 +9,7 @@ class Node {
         Node* leftLeg;
         Node* rightLeg;
 
-        friend class BSTree;
+        friend class Tree;
 
     public:
 
