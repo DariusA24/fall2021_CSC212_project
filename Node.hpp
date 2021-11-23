@@ -11,6 +11,8 @@ class Node {
 
         Node* Insert ( int data );
 
+        void changeColor ( Node* root );
+
         friend class BSTree;
 
     public:
