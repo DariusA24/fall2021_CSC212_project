@@ -9,14 +9,14 @@ class Node {
         Node* leftLeg;
         Node* rightLeg;
 
-        friend class Tree;
+        Node* Insert ( int data, bool isRed );
+
+        friend class BSTree;
 
     public:
 
         Node();
         ~Node();
         Node( int data );
-
-        Node* Insert ( int data, bool isRed );
 
 };
