@@ -14,4 +14,9 @@ class Tree {
 
         Node* insert ( int data );
 
+        Node* rotateLeft ( Node* root );
+        Node* rotateRight ( Node* root );
+
+
+
 };
