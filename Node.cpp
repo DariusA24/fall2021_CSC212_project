@@ -34,9 +34,28 @@ Node::Node ( int data ) {
 
 }
 
-Node* Node::Insert ( int Data ) {
+Node* Node::Insert ( int Data, Node* root ) {
 
-    // Color is set to red
+    if ( root == nullptr ) {
 
+        Node* newNode ( data );
+        return newNode;
+
+    }
+
+    if ( data >= root->data ) {
+
+        root->right = insert( data, root->right );
+
+    } else if ( data < root->data ) {
+
+        root->left = insert( data, root->left );
+
+    }
+
+    // Rotate checks need to be done here
+    // Recolor checks done after the rotate?
+    
+    return root;
 
 }
