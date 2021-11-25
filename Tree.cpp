@@ -19,12 +19,12 @@ Tree( Node* root ) {
 
 }
 
-Node* Tree::insert ( int data ) {
+Node* Tree::insert ( int data  ) {
 
     // This is the public insert
 }
 
-
+// Function to rotate left based off the root
 Node* Tree::rotateLeft ( Node* root ) {
 
     node *child = root->right;
@@ -36,7 +36,7 @@ Node* Tree::rotateLeft ( Node* root ) {
     return child;
 }
 
-
+// Function to rotate right based off the root
 Node* rotateRight ( Node* root ) {
 
     node *child = root->left;
