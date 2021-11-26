@@ -4,7 +4,7 @@
 
 Tree::Tree() {
 
-    this->root = nullptr;
+    this->root = NULL;
 
 }
 

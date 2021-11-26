@@ -4,20 +4,20 @@ Node::Node() {
 
     this->data = 0;
     this->isRed = false;
-    this->left = nullptr;
-    this->right = nullptr;
+    this->left = NULL;
+    this->right = NULL;
 
 }
 
 Node::~Node() {
 
-    if ( this->left != nullptr) {
+    if ( this->left != NULL) {
 
         delete this->left;
 
     }
 
-    if ( this->right != nullptr ) {
+    if ( this->right != NULL ) {
 
         delete this->right;
 
@@ -29,14 +29,14 @@ Node::Node ( int data ) {
 
     this->data = data;
     this->isRed = true;
-    this->left = nullptr;
-    this->right = nullptr;
+    this->left = NULL;
+    this->right = NULL;
 
 }
 
 Node* Node::Insert ( int Data, Node* root ) {
 
-    if ( root == nullptr ) {
+    if ( root == NULL ) {
 
         Node* newNode ( data );
         return newNode;

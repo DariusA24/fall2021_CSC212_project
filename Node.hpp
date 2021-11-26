@@ -1,4 +1,7 @@
 #pragma once
+#ifndef NULL
+#define NULL 0x00
+#endif
 
 class Node {
 
