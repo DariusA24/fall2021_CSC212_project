@@ -1,4 +1,4 @@
-#include "node.h"
+#include "Node.hpp"
 
 Node::Node() {
 
@@ -11,7 +11,7 @@ Node::Node() {
 
 Node::~Node() {
 
-    if ( this->left != nullptr ) {
+    if ( this->left != nullptr) {
 
         delete this->left;
 
