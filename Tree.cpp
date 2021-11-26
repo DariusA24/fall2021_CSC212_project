@@ -1,19 +1,20 @@
-#include "node.h"
+#include "Node.hpp"
+#include "Tree.hpp"
 #include <iostream>
 
-Tree() {
+Tree::Tree() {
 
     this->root = nullptr;
 
 }
 
-~Tree() {
+Tree::~Tree() {
 
     delete this->root;
 
 }
 
-Tree( Node* root ) {
+Tree::Tree( Node* root ) {
 
     this->root = root;
 
@@ -27,8 +28,8 @@ Node* Tree::insert ( int data  ) {
 // Function to rotate left based off the root
 Node* Tree::rotateLeft ( Node* root ) {
 
-    node *child = root->right;
-    node *childLeft = child->left;
+    Node *child = root->right;
+    Node *childLeft = child->left;
 
     child->left = root;
     root->right = childLeft;
@@ -39,8 +40,8 @@ Node* Tree::rotateLeft ( Node* root ) {
 // Function to rotate right based off the root
 Node* rotateRight ( Node* root ) {
 
-    node *child = root->left;
-    node *childRight =  child->right;
+    Node *child = root->left;
+    Node *childRight =  child->right;
 
     child->right = root;
     root->left = childRight;
