@@ -45,11 +45,11 @@ Node* Node::Insert ( int Data, Node* root ) {
 
     if ( data >= root->data ) {
 
-        root->right = insert( data, root->right );
+        root->right = Insert( data, root->right );
 
     } else if ( data < root->data ) {
 
-        root->left = insert( data, root->left );
+        root->left = Insert( data, root->left );
 
     }
 
