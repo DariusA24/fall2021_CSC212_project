@@ -3,20 +3,25 @@
 class Tree {
 
     private:
-
+    
+        // Variables
         Node* root;
+    
+        // Functions
+        Node* Insert ( int data, Node* root );
+    
+        Node* rotateLeft ( Node* root );
+        Node* rotateRight ( Node* root );
 
     public:
 
+        // Constructors
         Tree();
         ~Tree();
         Tree( Node* root );
 
-        Node* insert ( int data );
-
-        Node* rotateLeft ( Node* root );
-        Node* rotateRight ( Node* root );
-
-
-
+        // Functions
+        void Insert ( int data );
+    
+   
 };
