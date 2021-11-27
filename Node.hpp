@@ -1,7 +1,4 @@
 #pragma once
-#ifndef NULL
-#define NULL 0x00
-#endif
 
 class Node {
 
@@ -16,12 +13,17 @@ class Node {
 
         void changeColor ( Node* root );
 
-        friend class BSTree;
+        friend class Tree;
 
     public:
 
         Node();
         ~Node();
         Node( int data );
+
+        Node* Node::rotateLeft ( Node* root );
+        Node* Node::rotateRight ( Node* root );
+
+        bool SearchFor ( int value, Node* root );
 
 };
