@@ -84,25 +84,46 @@ Node* Node::Insert ( int Data ) {
     if ( root->right->isRed && ( !( root->left->isRed )  || root->left == nullptr ) ) {
 
         root = rotateLeft( root );
-        root.changeColor();
-        root->left.changeColor();
-
+        
+        // Swap colors of root and it's left leg
+        if ( !( root->isRed == root->left->isRed ) ) {
+            
+            bool color = root->isRed;
+            root->isRed = root->left->isRed;
+            root->left->isRed = color;
+            
+        }
+        
     }
 
     // Case for when left child & left grandchild are red
     if ( root->left->isRed && root->left->left->isRed ) {
 
         root = rotateRight( root );
-        root.changeColor();
-        root->right.changeColor();
+        
+        // Swap colors of root and it's right leg
+        if ( !( root->isRed == root->right->isRed ) ) {
+            
+            bool color = root->isRed;
+            root->isRed = root->right->isRed;
+            root->right->isRed = color;
+            
+        }
 
     }
 
     if ( root->right->isRed && !( root->left->isRed ) ) {
 
         root = rotateLeft( root );
-        root.changeColor();
-        root->left.changeColor();
+        
+        // Swap colors of root and it's left leg
+        if ( !( root->isRed == root->left->isRed ) ) {
+            
+            bool color = root->isRed;
+            root->isRed = root->left->isRed;
+            root->left->isRed = color;
+            
+        }
 
     }
 
@@ -130,14 +151,22 @@ bool SearchFor ( int value, Node* root ) {
 
     if ( root->data == value ) {
 
-        // Data exists in tree
+        // Data exists in tree, return true
         // !!!!!! If we have to give exact location then this is more in depth fs !!!!!!
         return true;
 
     }
 
+    if ( value >= root->data ) {
 
+        SearchFor ( value, root->right );
 
+    } else if ( value < root->data ) {
 
+        SearchFor ( value, root->left );
 
+    }
+    
+    return false;
+    
 }
