@@ -1,5 +1,6 @@
 #include "node.h"
 
+// Default constructor
 Node::Node() {
 
     this->data = 0;
@@ -9,6 +10,7 @@ Node::Node() {
 
 }
 
+// Deconstructor
 Node::~Node() {
 
     if ( this->left != nullptr ) {
@@ -25,10 +27,14 @@ Node::~Node() {
 
 }
 
+// Custom constructor
 Node::Node ( int data ) {
 
+    // Create node with the data value and make it red
     this->data = data;
     this->isRed = true;
+    
+    // Both legs are nullptr, they don't exist yet
     this->left = nullptr;
     this->right = nullptr;
 
@@ -37,10 +43,16 @@ Node::Node ( int data ) {
 // Function to rotate Left based off the root
 Node* Node::rotateLeft ( Node* root ) {
 
+    // Create copy node of the root's right child
     Node *child = root->right;
+    
+    // Create copy node of the root's left child
     Node *childLeft = child->left;
 
+    // Set the root's right leg's node left leg's node as the root node's value
     child->left = root;
+    
+    // Set the root's right leg node as the childLeft node
     root->right = childLeft;
 
     return child;
