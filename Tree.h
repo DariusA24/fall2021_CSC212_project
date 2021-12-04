@@ -1,17 +1,22 @@
-#include "Node.hpp"
+#include "Node.h"
+
+#include <string>
+#include <cstring>
 
 class Tree {
 
     private:
-    
+
         // Variables
         Node* root;
-    
+
         // Functions
-        Node* Insert ( int data, Node* root );
-    
+        Node* Insert ( std::string data, Node* root );
+
         Node* rotateLeft ( Node* root );
         Node* rotateRight ( Node* root );
+
+        bool SearchFor ( std::string data, Node* root );
 
     public:
 
@@ -21,7 +26,7 @@ class Tree {
         Tree( Node* root );
 
         // Functions
-        void Insert ( int data );
-    
-   
+        void Insert ( std::string data );
+        bool Search ( std::string data );
+
 };
