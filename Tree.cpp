@@ -24,6 +24,39 @@ Tree::Tree( Node* root ) {
 
 }
 
+// --------------------------------------------------------
+// Function to return if the root is red in color or black
+// --------------------------------------------------------
+bool Tree::color ( Node* root ) {
+
+    if ( root == nullptr ) {
+
+        return false;
+
+    }
+
+    if ( root->isRed == true ) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+// ------------------------------------------------
+// Function is a public insert function that takes
+// data and calls the private insert function
+// ------------------------------------------------
+void Tree::Insert ( std::string data ) {
+
+    // This is the public insert
+    //std::cout << "Public insert called" << std::endl;
+    this->root = this->Insert( data, this->root );
+    //std::cout << "Inserted" << std::endl;
+    this->root->isRed = false;
+
+}
+
 // --------------------------------------------------------------
 // Function is a private insert function that takes data and
 // a root node, then inserts the node at the specific location
@@ -41,77 +74,74 @@ Node* Tree::Insert ( std::string data, Node* root ) {
 
     }
 
+    //std::cout << "Base case not met" << std::endl;
+
     // Checks if the data is >= to the data of the root, if it is then it will move to the right
     if ( data >= root->data ) {
 
-        std::cout << "Moved right" << std::endl;
+        //std::cout << "Moved right" << std::endl;
         root->right = Insert( data, root->right );
 
     }
     // Checks if the data is < to the data of the root, if it is then it will move to the left
+    else if ( data < root->data ) {
+
+        //std::cout << "Moved left" << std::endl;
+        root->left = Insert( data, root->left );
+    }
+
     else {
 
-        std::cout << "Moved left" << std::endl;
-        root->left = Insert( data, root->left );
+        return root;
 
     }
 
+    //std::cout<<"Checking first criteria"<<std::endl;
 
     // Case for when the left child is black/nullptr and the right child is red
-    if ( root->right != nullptr && ( root->left == nullptr || root->left->isRed == false ) ) {
+    if ( color ( root->right ) && color ( root->left ) == false ) {
 
-        if ( root->right->isRed && !( root->left->isRed ) ) {
+        //std::cout << "Met first criteria" << std::endl;
+        root = rotateLeft ( root );
 
-            std::cout << "Met first criteria" << std::endl;
-            root = rotateLeft ( root );
+        // Swap colors of root and it's left leg
+        if ( root->isRed != root->left->isRed ) {
 
-            // Swap colors of root and it's left leg
-            if ( root->isRed != root->left->isRed ) {
-
-                bool color = root->isRed;
-                root->isRed = root->left->isRed;
-                root->left->isRed = color;
-
-            }
+            bool color = root->isRed;
+            root->isRed = root->left->isRed;
+            root->left->isRed = color;
 
         }
 
     }
 
+    //std::cout<<"checking second criteria"<<std::endl;
     // Case for when left child & left grandchild are red
+    if ( color ( root->left ) && color ( root->left->left ) ) {
 
-    if ( root->left != nullptr & root->left->left != nullptr ) {
+        //std::cout << "Met second criteria" << std::endl;
+        root = rotateRight( root );
 
-        if ( root->left->isRed && root->left->left->isRed ) {
+        // Swap colors of root and it's right leg
+        if ( root->isRed != root->right->isRed ) {
 
-            std::cout << "Met second criteria" << std::endl;
-            root = rotateRight( root );
-
-            // Swap colors of root and it's right leg
-            if ( root->isRed != root->right->isRed ) {
-
-                bool color = root->isRed;
-                root->isRed = root->right->isRed;
-                root->right->isRed = color;
-
-            }
+            bool color = root->isRed;
+            root->isRed = root->right->isRed;
+            root->right->isRed = color;
 
         }
 
     }
-
+    //std::cout<<"Checking third criteria"<<std::endl;
     // Case when both left and right child are Red in color
-    if ( root->left != nullptr && root->right != nullptr ) {
+    if ( color ( root->left ) && color ( root->right ) ) {
 
-        if ( root->left->isRed && root->right->isRed ) {
+        //std::cout << "Met third criteria" << std::endl;
+        root->isRed = !root->isRed;
 
-            std::cout << "Met third criteria" << std::endl;
-            root->isRed = !root->isRed;
-
-            // Change the color of both legs to black.
-            root->left->isRed = false;
-            root->right->isRed =  false;
-        }
+        // Change the color of both legs to black.
+        root->left->isRed = false;
+        root->right->isRed =  false;
 
     }
 
@@ -119,20 +149,80 @@ Node* Tree::Insert ( std::string data, Node* root ) {
     return root;
 }
 
-// ------------------------------------------------
-// Function is a public insert function that takes
-// data and calls the private insert function
-// ------------------------------------------------
-void Tree::Insert ( std::string data ) {
 
-    // This is the public insert
-    std::cout << "Public insert called" << std::endl;
-    this->root = this->Insert( data, this->root );
-    std::cout << "Inserted" << std::endl;
-    this->root->isRed = false;
+// ---------------------------------------------------
+// Function to find and return the height of the tree
+// ---------------------------------------------------
+int Tree::height ( Node* root ) {
+
+    // If the tree is empty / root node is a nullptr return -1 to the count
+    if ( root == nullptr ) {
+
+        return -1;
+
+    }
+
+    int left = height ( root->left );
+    int right = height ( root->right );
+
+    return ( left > right ? left + 1 : right + 1 );
 
 }
 
+
+// ----------------------------------------------------------------------------------------------------------------
+// Function that will go through the tree in a preorder formation ( ROOT THEN LEFT THEN ROOT ), makes copy of tree
+// ----------------------------------------------------------------------------------------------------------------
+void Tree::preorder ( Node* root ) {
+
+    if ( root == nullptr ) {
+
+        return;
+
+    }
+
+    std::cout << root->data << ":" << root->isRed << ", ";
+    this->preorder( root->left );
+    this->preorder( root->right );
+
+    return;
+}
+
+// -----------------------------------------------------------------------------------------------------------
+// Function that will go through the tree in a inorder formation ( LEFT THEN ROOT THEN RIGHT ), searches tree
+// -----------------------------------------------------------------------------------------------------------
+void Tree::inorder ( Node* root ) {
+
+    if ( root == nullptr ) {
+
+        return;
+
+    }
+
+    this->inorder( root->left );
+    std::cout << root->data << ":" << root->isRed << ", ";
+    this->inorder( root->right );
+
+    return;
+}
+
+// -------------------------------------------------------------------------------------------------------------
+// Function that will go through the tree in a postorder formation ( LEFT THEN RIGHT THEN ROOT ), deleting tree
+// -------------------------------------------------------------------------------------------------------------
+void Tree::postorder ( Node* root ) {
+
+    if ( root == nullptr ) {
+
+        return;
+
+    }
+
+    this->postorder( root->left );
+    this->postorder( root->right );
+    std::cout << root->data << ":" << root->isRed << ", ";
+
+    return;
+}
 
 // ------------------------------------------------
 // Function to rotate Left based off the root
@@ -142,16 +232,16 @@ Node* Tree::rotateLeft ( Node* root ) {
     // Create copy node of the root's right child
     Node *child = root->right;
 
-    // Create copy node of the root's left child
-    Node *leftGrandChild = root->right->left;
+    // Create copy node of the root's right child's left child
+    Node *leftRightGrandChild = root->right->left;
 
     // Set the root's right leg's node left leg's node as the root node's value
     root->right->left = root;
 
-    // Set the root's right leg node as the childLeft node
-    root->right = leftGrandChild;
+    // Set the root's right leg node as the leftRightGrandChild node
+    root->right = leftRightGrandChild;
 
-    std::cout << "Rotated left!" << std::endl;
+    //std::cout << "Rotated left!" << std::endl;
     return child;
 }
 
@@ -160,24 +250,51 @@ Node* Tree::rotateLeft ( Node* root ) {
 // ------------------------------------------------
 Node* Tree::rotateRight ( Node* root ) {
 
+    // Create copy node of the root's left child
     Node *child = root->left;
-    Node *rightGrandChild =  root->left->right;
 
+    // Create copy node of the root's left child's right child
+    Node *rightLeftGrandChild =  root->left->right;
+
+    // Set the root's left leg's node right leg's node as the root node's value
     root->left->right = root;
-    root->left = rightGrandChild;
 
-    std::cout << "Rotated right!" << std::endl;
+    // Set the root's left leg node as the rightLeftGrandChild node
+    root->left = rightLeftGrandChild;
+
+    //std::cout << "Rotated right!" << std::endl;
     return child;
 }
 
+int Tree::Count ( Node* root, std::string key ) {
 
+    if ( root == nullptr ) {
 
+        return 0;
 
+    } else if ( root->data == key ) {
+
+        return Count ( root->left, key ) + 1 + Count ( root->right, key );
+
+    } else {
+
+        return Count ( root->left, key ) + Count ( root->right, key );
+
+    }
+
+}
 
 // -----------------------------------------------------------
 // Search function to find if the value is in the tree or not
 // -----------------------------------------------------------
 bool Tree::SearchFor ( std::string value, Node* root ) {
+
+    // Tree either doesnt exist at the first recursion call, or the tree reaches it's last branch and doesn't find the node
+    if ( root == nullptr ) {
+
+        return false;
+
+    }
 
     // Base case: if the root's data is the same as the data given by the user
     if ( root->data == value ) {
@@ -187,18 +304,49 @@ bool Tree::SearchFor ( std::string value, Node* root ) {
 
     }
 
-    // Check if the value given is
+    // Check if the value given is > the root's value
     if ( value >= root->data ) {
 
-        return SearchFor ( value, root->right );
+        // Calls itself again using the root's right child as the new root
+        return this->SearchFor ( value, root->right );
 
-    } else if ( value < root->data ) {
+    } else {
 
-        return SearchFor ( value, root->left );
+        // Calls itself again using the root's left child as the new root
+        return this->SearchFor ( value, root->left );
 
     }
 
-    // Not too sure if this is needed
-    return false;
+}
 
+// -----------------------
+// Public height function
+// -----------------------
+int Tree::height () {
+
+    std::cout << this->height ( this->root ) <<std::endl;
+    return this->height ( this->root );
+
+}
+
+
+// -----------------------
+// Public search function
+// -----------------------
+bool Tree::Search ( std::string data ) {
+
+    return this->SearchFor ( data, this->root );
+
+}
+
+// -----------------------
+// Public count function
+// -----------------------
+int Tree::Count ( std::string data ) {
+
+    if ( this->root == nullptr ) {
+        return -1;
+    } else {
+        return this->Count ( this->root, data );
+    }
 }
