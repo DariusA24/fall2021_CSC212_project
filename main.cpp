@@ -2,7 +2,6 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <algorithm>
 #include <time.h>
 
 #include "Tree.h"
