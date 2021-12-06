@@ -2,6 +2,23 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
+
+//                     _,,......_
+//                  ,-'          `'--.
+//               ,-'  _              '-.
+//      (`.    ,'   ,  `-.              `.                      ____________________
+//       \ \  -    / )    \               \                     |   Leon Hartley   |
+//       `\`-^^^, )/      |     /         :                     |  Darius Argueta  |
+//          )^ ^ ^V/            /          '.                   | Armani Fernandez |
+//          |      )            |           `.                  | December 6, 2021 |
+//          9   9 /,--,\    |._:`         .._`.                 -------\   /--------
+//          |    /   /  `.  \    `.      (   `.`.                       | |
+//          |   / \  \    \  \     `--\   )    `.`.___                  | |
+//         .;;./  '   )   '   )       ///'       `-"'                   | |
+//         `--'   7//\    ///\                                          | |
+
 
 // Default constructor
 Tree::Tree() {
@@ -266,6 +283,9 @@ Node* Tree::rotateRight ( Node* root ) {
     return child;
 }
 
+// ---------------------------------------------------------------------------
+// Search function to find count of duplicates of a certain value in the tree
+// ---------------------------------------------------------------------------
 int Tree::Count ( Node* root, std::string key ) {
 
     if ( root == nullptr ) {
@@ -329,7 +349,6 @@ int Tree::height () {
 
 }
 
-
 // -----------------------
 // Public search function
 // -----------------------
@@ -345,8 +364,64 @@ bool Tree::Search ( std::string data ) {
 int Tree::Count ( std::string data ) {
 
     if ( this->root == nullptr ) {
+
         return -1;
+
     } else {
+
         return this->Count ( this->root, data );
+
     }
+}
+
+void Tree::generateDigraph ( std::string fileName ) {
+
+    // Opens the outfile file, prepares it for writing
+    std::ofstream outputFile( fileName );
+
+    // Write the first line
+    outputFile << "digraph G {" << "\n\n";
+
+    // Create vector to hold each line for the dot file
+    std::vector<std::string> dotLines;
+
+    // Call traverse digraph function to search through tree for every edge in a preorder fashion
+    TraverseDigraph ( this->root, dotLines );
+    std::cout << "Traversed good" << std::endl;
+
+    // Loop to write each line from the dotLines vector to the output file
+    for ( int i = 0; i < dotLines.size(); i++ ) {
+
+        outputFile << dotLines[i];
+
+    }
+
+    // Write final line
+    outputFile << "\n}";
+
+    // Closes file
+    outputFile.close();
+
+}
+
+void Tree::TraverseDigraph ( Node* root, std::vector<std::string> &dotLines ) {
+
+    // Traversed in a preOrder method
+
+    if ( root == nullptr ) {
+        return;
+    }
+
+    if ( root->left != nullptr ) {
+        dotLines.push_back( "    " + root->data + " -> " + root->left->data + ( root->left->isRed ? "[color=\"red\"]\n" : "[color=\"black\"]\n" ) );
+    }
+
+    if ( root->right != nullptr ) {
+        dotLines.push_back( "    " + root->data + " -> " + root->right->data + ( root->right->isRed ? "[color=\"red\"]\n" : "[color=\"black\"]\n" ) );
+    }
+
+    this->TraverseDigraph ( root->left, dotLines );
+
+    this->TraverseDigraph ( root->right, dotLines );
+
 }
