@@ -33,11 +33,13 @@ class Tree {
 
         bool SearchFor ( std::string data, Node* root );
         int Count ( Node* root, std::string key );
-
         int height ( Node* root );
+
         void preorder ( Node* root );
         void inorder ( Node* root );
         void postorder ( Node* root );
+
+        void deleteTree ( Node* root );
 
     public:
 
