@@ -30,7 +30,7 @@ Tree::Tree() {
 // Deconstructor
 Tree::~Tree() {
 
-    deleteTree ( Node* root );
+    deleteTree ( this->root );
 
 }
 
