@@ -8,6 +8,11 @@ A BST is a data structure that can hold and maintain data that can be traversed 
 
 ## How it works
 
+The tree is self-satisfies itself after every insert to ensure it follows the main rules of a LLRB BST.
+The rules:
+1. A node cannot have a black left child, and a red right child
+2. A node cannot have a red left child, and a red left grandchild
+3. A node cannot have both children be red
 
 ## Examples of usage
 
