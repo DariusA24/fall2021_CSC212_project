@@ -30,7 +30,7 @@ Tree::Tree() {
 // Deconstructor
 Tree::~Tree() {
 
-    delete this->root;
+    deleteTree ( Node* root );
 
 }
 
@@ -40,6 +40,62 @@ Tree::Tree( Node* root ) {
     this->root = root;
 
 }
+
+// -----------------
+// Public functions
+// -----------------
+
+// ------------------------------------------------
+// Public insert function
+// Function is a public insert function that takes
+// data and calls the private insert function
+// ------------------------------------------------
+void Tree::Insert ( std::string data ) {
+
+    // This is the public insert
+    this->root = this->Insert( data, this->root );
+    this->root->isRed = false;
+
+}
+
+// -----------------------
+// Public height function
+// -----------------------
+int Tree::height () {
+
+    std::cout << this->height ( this->root ) <<std::endl;
+    return this->height ( this->root );
+
+}
+
+// -----------------------
+// Public search function
+// -----------------------
+bool Tree::Search ( std::string data ) {
+
+    return this->SearchFor ( data, this->root );
+
+}
+
+// -----------------------
+// Public count function
+// -----------------------
+int Tree::Count ( std::string data ) {
+
+    if ( this->root == nullptr ) {
+
+        return -1;
+
+    } else {
+
+        return this->Count ( this->root, data );
+
+    }
+}
+
+// ------------------
+// Private Functions
+// ------------------
 
 // --------------------------------------------------------
 // Function to return if the root is red in color or black
@@ -275,15 +331,20 @@ Node* Tree::rotateRight ( Node* root ) {
 // ---------------------------------------------------------------------------
 int Tree::Count ( Node* root, std::string key ) {
 
+    // If the root is non existant dont add anything to the count
     if ( root == nullptr ) {
 
         return 0;
 
-    } else if ( root->data == key ) {
+    }
+    // If the key matches the root's data, add one to the count and continue the search in pre-order way
+    else if ( root->data == key ) {
 
         return Count ( root->left, key ) + 1 + Count ( root->right, key );
 
-    } else {
+    }
+    // If the key doesnt match the root's data, continue the search in pre-order way
+    else {
 
         return Count ( root->left, key ) + Count ( root->right, key );
 
@@ -326,53 +387,9 @@ bool Tree::SearchFor ( std::string value, Node* root ) {
 
 }
 
-// ------------------------------------------------
-// Function is a public insert function that takes
-// data and calls the private insert function
-// ------------------------------------------------
-void Tree::Insert ( std::string data ) {
-
-    // This is the public insert
-    this->root = this->Insert( data, this->root );
-    this->root->isRed = false;
-
-}
-
-// -----------------------
-// Public height function
-// -----------------------
-int Tree::height () {
-
-    std::cout << this->height ( this->root ) <<std::endl;
-    return this->height ( this->root );
-
-}
-
-// -----------------------
-// Public search function
-// -----------------------
-bool Tree::Search ( std::string data ) {
-
-    return this->SearchFor ( data, this->root );
-
-}
-
-// -----------------------
-// Public count function
-// -----------------------
-int Tree::Count ( std::string data ) {
-
-    if ( this->root == nullptr ) {
-
-        return -1;
-
-    } else {
-
-        return this->Count ( this->root, data );
-
-    }
-}
-
+// -----------------------------------------------------------
+// Function that generates a digraph output file for graphviz
+// -----------------------------------------------------------
 void Tree::generateDigraph ( std::string fileName ) {
 
     // Opens the outfile file, prepares it for writing
@@ -402,24 +419,48 @@ void Tree::generateDigraph ( std::string fileName ) {
 
 }
 
+// --------------------------------------------------------------------------------------------------
+// Function that traverses the BST and adds to a vector a edge declaration for graphviz to interpret
+// --------------------------------------------------------------------------------------------------
 void Tree::TraverseDigraph ( Node* root, std::vector<std::string> &dotLines ) {
 
-    // Traversed in a preOrder method
+    // Traversed in a pre-order method
 
     if ( root == nullptr ) {
         return;
     }
 
+    // Checks to see if the left child exists
     if ( root->left != nullptr ) {
         dotLines.push_back( "    " + root->data + " -> " + root->left->data + ( root->left->isRed ? "[color=\"red\"]\n" : "[color=\"black\"]\n" ) );
     }
 
+    // Checks to see if the right child exists
     if ( root->right != nullptr ) {
         dotLines.push_back( "    " + root->data + " -> " + root->right->data + ( root->right->isRed ? "[color=\"red\"]\n" : "[color=\"black\"]\n" ) );
     }
 
+    // Continues pre-order search
     this->TraverseDigraph ( root->left, dotLines );
-
     this->TraverseDigraph ( root->right, dotLines );
 
+}
+
+
+// --------------------------------------------------------------------------------------
+// Function that will go through the tree in a postorder formation and delete every node
+// --------------------------------------------------------------------------------------
+void Tree::deleteTree ( Node* root ) {
+
+    if ( root == nullptr ) {
+
+        return;
+
+    }
+
+    this->postorder( root->left );
+    this->postorder( root->right );
+    delete this->root;
+
+    return;
 }
