@@ -60,19 +60,6 @@ bool Tree::color ( Node* root ) {
 
 }
 
-// ------------------------------------------------
-// Function is a public insert function that takes
-// data and calls the private insert function
-// ------------------------------------------------
-void Tree::Insert ( std::string data ) {
-
-    // This is the public insert
-    //std::cout << "Public insert called" << std::endl;
-    this->root = this->Insert( data, this->root );
-    //std::cout << "Inserted" << std::endl;
-    this->root->isRed = false;
-
-}
 
 // --------------------------------------------------------------
 // Function is a private insert function that takes data and
@@ -339,6 +326,18 @@ bool Tree::SearchFor ( std::string value, Node* root ) {
 
 }
 
+// ------------------------------------------------
+// Function is a public insert function that takes
+// data and calls the private insert function
+// ------------------------------------------------
+void Tree::Insert ( std::string data ) {
+
+    // This is the public insert
+    this->root = this->Insert( data, this->root );
+    this->root->isRed = false;
+
+}
+
 // -----------------------
 // Public height function
 // -----------------------
@@ -387,7 +386,6 @@ void Tree::generateDigraph ( std::string fileName ) {
 
     // Call traverse digraph function to search through tree for every edge in a preorder fashion
     TraverseDigraph ( this->root, dotLines );
-    std::cout << "Traversed good" << std::endl;
 
     // Loop to write each line from the dotLines vector to the output file
     for ( int i = 0; i < dotLines.size(); i++ ) {
