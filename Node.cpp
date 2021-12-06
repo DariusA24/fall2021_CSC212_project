@@ -1,6 +1,20 @@
 #include "Node.h"
 #include <string>
 
+//                     _,,......_
+//                  ,-'          `'--.
+//               ,-'  _              '-.
+//      (`.    ,'   ,  `-.              `.                      ____________________
+//       \ \  -    / )    \               \                     |   Leon Hartley   |
+//       `\`-^^^, )/      |     /         :                     |  Darius Argueta  |
+//          )^ ^ ^V/            /          '.                   | Armani Fernandez |
+//          |      )            |           `.                  | December 6, 2021 |
+//          9   9 /,--,\    |._:`         .._`.                 -------\   /--------
+//          |    /   /  `.  \    `.      (   `.`.                       | |
+//          |   / \  \    \  \     `--\   )    `.`.___                  | |
+//         .;;./  '   )   '   )       ///'       `-"'                   | |
+//         `--'   7//\    ///\                                          | |
+
 // Default constructor
 Node::Node() {
 
@@ -49,3 +63,4 @@ void Node::changeColor ( ) {
     this->isRed = !( this->isRed );
 
 }
+
