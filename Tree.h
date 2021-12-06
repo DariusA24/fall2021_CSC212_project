@@ -1,7 +1,21 @@
 #include "Node.h"
 
 #include <string>
-#include <cstring>
+#include <vector>
+
+//                     _,,......_
+//                  ,-'          `'--.
+//               ,-'  _              '-.
+//      (`.    ,'   ,  `-.              `.                      ____________________
+//       \ \  -    / )    \               \                     |   Leon Hartley   |
+//       `\`-^^^, )/      |     /         :                     |  Darius Argueta  |
+//          )^ ^ ^V/            /          '.                   | Armani Fernandez |
+//          |      )            |           `.                  | December 6, 2021 |
+//          9   9 /,--,\    |._:`         .._`.                 -------\   /--------
+//          |    /   /  `.  \    `.      (   `.`.                       | |
+//          |   / \  \    \  \     `--\   )    `.`.___                  | |
+//         .;;./  '   )   '   )       ///'       `-"'                   | |
+//         `--'   7//\    ///\                                          | |
 
 class Tree {
 
@@ -38,6 +52,7 @@ class Tree {
         int Count ( std::string data );
         int height ();
 
-        void generateDOT ();
+        void generateDigraph ( std::string fileName );
+        void TraverseDigraph ( Node* root, std::vector<std::string> &dotLines );
 
 };
