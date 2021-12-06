@@ -6,6 +6,20 @@
 
 #include "Tree.h"
 
+//                     _,,......_
+//                  ,-'          `'--.
+//               ,-'  _              '-.
+//      (`.    ,'   ,  `-.              `.                      ____________________
+//       \ \  -    / )    \               \                     |   Leon Hartley   |
+//       `\`-^^^, )/      |     /         :                     |  Darius Argueta  |
+//          )^ ^ ^V/            /          '.                   | Armani Fernandez |
+//          |      )            |           `.                  | December 6, 2021 |
+//          9   9 /,--,\    |._:`         .._`.                 -------\   /--------
+//          |    /   /  `.  \    `.      (   `.`.                       | |
+//          |   / \  \    \  \     `--\   )    `.`.___                  | |
+//         .;;./  '   )   '   )       ///'       `-"'                   | |
+//         `--'   7//\    ///\                                          | |
+
 // Function declarations
 void populateTree ( std::string fileName, Tree* tree );
 int getUserChoice ();
@@ -45,8 +59,9 @@ int getUserChoice () {
 
     int userChoice = 0;
     std::cout << "(1.): Search if a word is in the tree" << std::endl;
-    std::cout << "(2.): Generate DOT file" << std::endl;
-    std::cout << "(3.): Exit program" << std::endl;
+    std::cout << "(2.): Find height of tree" << std::endl;
+    std::cout << "(3.): Generate DOT file" << std::endl;
+    std::cout << "(4.): Exit program" << std::endl;
     std::cin >> userChoice;
 
     return userChoice;
@@ -82,15 +97,27 @@ bool handleUserChoice ( Tree* tree, int userChoice ) {
 
     } else if ( userChoice == 2 ) {
 
-        // Generate DOT file
-        std::cout << "DOT file construction WIP" << std::endl;
+        // Returns the height of the tree
+        std::cout << "Height of tree: " << tree->height() << std::endl;
         return true;
 
     } else if ( userChoice == 3 ) {
+
+        // Generate DOT file
+        std::string fileName;
+        std::cout << "What would you like to name the file? ( excluding file extension )" << std::endl;
+        std::cin >> fileName;
+        tree->generateDigraph ( fileName + ".dot" );
+        std::cout << fileName << ".dot successfuly generated" << std::endl;
+        return true;
+
+    } else if ( userChoice == 4 ) {
         return false;
     }
 
+
 }
+
 
 void populateTree ( std::string fileName, Tree* tree ) {
 
