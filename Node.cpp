@@ -63,4 +63,3 @@ void Node::changeColor ( ) {
     this->isRed = !( this->isRed );
 
 }
-
