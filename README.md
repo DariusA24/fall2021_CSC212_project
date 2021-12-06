@@ -14,6 +14,6 @@ The rules:
 2. A node cannot have a red left child, and a red left grandchild
 3. A node cannot have both children be red
 
-## Examples of usage
+## Usage of our program
 
 
