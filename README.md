@@ -18,6 +18,14 @@ The big difference between the data structures is that the LLRB tree follows cer
 ## How it works
 
 The tree is self-satisfies itself after every insert to ensure it follows the main rules of a LLRB BST.
+Inserting into the tree:
+The tree recursively inserts new data into the tree by first seeing if the data is greater then or less then the root. Once it is determined the data recursively traverses and checks each parent node. Once it is able to determine where the data should go and the node is NULL (which means there is no data) then the data is inserted into the tree. After, the tree will check for certain rules (listed down below) - then it will arrange the tree to the correct order. 
+
+How the colors are determined:
+1. Root node is BLACK in color at all times. 
+2. Every new Node inserted will be RED in color. 
+3. Each NULL child of a node is considered as BLACK in color. 
+
 The rules:
 1. A node cannot have a black left child, and a red right child
 2. A node cannot have a red left child, and a red left grandchild
@@ -29,7 +37,7 @@ Here is an example of the following tree:
 
 The LLRB tree will rotate its nodes in order to suffice to the following conditions listed above. Here is an example of the structure doing both left and right rotations:
 
-![image](https://user-images.githubusercontent.com/71108520/144953646-fe155fc6-ae6d-44ec-ad0e-bc00d9a5c7dc.png)
+![image](Tree_rotation_animation_250x250.gif)
 
 
 
