@@ -31,7 +31,7 @@ class Tree {
         Node* rotateRight ( Node* root );
         bool color ( Node* root );
 
-        bool SearchFor ( std::string data, Node* root );
+        bool SearchFor ( std::string key, Node* root );
         int Count ( Node* root, std::string key );
         int height ( Node* root );
 
