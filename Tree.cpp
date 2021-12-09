@@ -124,17 +124,12 @@ bool Tree::color ( Node* root ) {
 // --------------------------------------------------------------
 Node* Tree::Insert ( std::string data, Node* root ) {
 
-    //std::cout << "Attempting to insert: " << data << ", into the tree!" << std::endl;
-
     // Base case: when the Node reached is a nullptr, then the data has found it's place to make a node
     if ( root == nullptr ) {
 
-        //std::cout << "Inserted " << data << " successfully!" << std::endl;
         return new Node ( data );
 
     }
-
-    //std::cout << "Base case not met" << std::endl;
 
     // Checks if the data is >= to the data of the root, if it is then it will move to the right
     if ( data >= root->data ) {
@@ -156,8 +151,6 @@ Node* Tree::Insert ( std::string data, Node* root ) {
 
     }
 
-    //std::cout<<"Checking first criteria"<<std::endl;
-
     // Case for when the left child is black/nullptr and the right child is red
     if ( color ( root->right ) && color ( root->left ) == false ) {
 
@@ -175,7 +168,6 @@ Node* Tree::Insert ( std::string data, Node* root ) {
 
     }
 
-    //std::cout<<"checking second criteria"<<std::endl;
     // Case for when left child & left grandchild are red
     if ( color ( root->left ) && color ( root->left->left ) ) {
 
@@ -192,7 +184,7 @@ Node* Tree::Insert ( std::string data, Node* root ) {
         }
 
     }
-    //std::cout<<"Checking third criteria"<<std::endl;
+
     // Case when both left and right child are Red in color
     if ( color ( root->left ) && color ( root->right ) ) {
 
@@ -355,7 +347,7 @@ int Tree::Count ( Node* root, std::string key ) {
 // -----------------------------------------------------------
 // Search function to find if the value is in the tree or not
 // -----------------------------------------------------------
-bool Tree::SearchFor ( std::string value, Node* root ) {
+bool Tree::SearchFor ( std::string key, Node* root ) {
 
     // Tree either doesnt exist at the first recursion call, or the tree reaches it's last branch and doesn't find the node
     if ( root == nullptr ) {
@@ -365,23 +357,23 @@ bool Tree::SearchFor ( std::string value, Node* root ) {
     }
 
     // Base case: if the root's data is the same as the data given by the user
-    if ( root->data == value ) {
+    if ( root->data == key ) {
 
         // Data exists in tree, return true
         return true;
 
     }
 
-    // Check if the value given is > the root's value
-    if ( value >= root->data ) {
+    // Check if the key given is > the root's value
+    if ( key >= root->data ) {
 
         // Calls itself again using the root's right child as the new root
-        return this->SearchFor ( value, root->right );
+        return this->SearchFor ( key, root->right );
 
     } else {
 
         // Calls itself again using the root's left child as the new root
-        return this->SearchFor ( value, root->left );
+        return this->SearchFor ( key, root->left );
 
     }
 
