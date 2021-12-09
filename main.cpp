@@ -200,12 +200,12 @@ void populateTree ( std::string fileName, Tree* tree, int method ) {
 
                     tree->Insert( word );
 
-		}
+			    }
 
             }
 
         }
 
-    }
+	}
 
 }
