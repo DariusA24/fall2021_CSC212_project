@@ -44,3 +44,11 @@ The LLRB tree will rotate its nodes in order to suffice to the following conditi
 ## Usage of our program
 
 Binary trees are seen being used many different applications. It can be seen in routing tables, heaps, hierarchical data, etc. Since you are able to dynamically scale the tree, they have advantages over other data structures. 
+
+To use our program you must build it, then when calling the program to run you have to run it with a text file in the same line so it knows what to open.
+For example: 
+using cs50 ide to run a program you would use the command, ./program, in order to use ours you must follow this with a text file.
+So it would be ./program textfile.txt, and thats it!
+
+The program will then open and you may choose the insertion method, allowing duplicate nodes or not allowing duplicate nodes, based off your preference.
+It will then start a simple UI loop to check certain things about the program.
