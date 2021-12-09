@@ -17,7 +17,7 @@ The big difference between the data structures is that the LLRB tree follows cer
 
 ## How it works
 
-The tree is self-satisfies itself after every insert to ensure it follows the main rules of a LLRB BST.
+The tree self-satisfies itself after every insert to ensure it follows the main rules of a LLRB BST.
 Inserting into the tree:
 The tree recursively inserts new data into the tree by first seeing if the data is greater then or less then the root. Once it is determined the data recursively traverses and checks each parent node. Once it is able to determine where the data should go and the node is NULL (which means there is no data) then the data is inserted into the tree. After, the tree will check for certain rules (listed down below) - then it will arrange the tree to the correct order. 
 
